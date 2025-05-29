@@ -1,0 +1,43 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content">
+        <div class="row">
+            <h1>Smart Grid Anomalies Detection</h1>
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-header">
+                        <h4 class="card-title"> Training Dataset: Data from MODBUS/TCP protocol</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="">
+                            <table class="table tablesorter " id="">
+                                <thead class=" text-primary">
+                                <tr>
+                                    {% for column in columns %}
+                                        <th>
+                                            {{ column }} <!-- header -->
+                                        </th>
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for row in data %}
+                                    <tr>
+                                        {% for value in row %} <!-- rows -->
+                                            <td>
+                                                {{ value }} <!-- value -->
+                                            </td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% load static %}
+<ul class="nav">
+    <li class="">
+        <div class="menu-row">
+            <a href="{% url 'home' %}" class="link">
+                <img src="{% static 'icons/home.svg' %}" alt="icon" class="icon"/>
+                <p>Home</p>
+            </a>
+        </div>
+    </li>
+     <li class="">
+        <div class="menu-row">
+            <a href="{% url 'dataset' %}" class="link">
+                <img src="{% static 'icons/data.svg' %}" alt="icon" class="icon"/>
+                <p>Dataset</p>
+            </a>
+        </div>
+    </li>
+     <li class="">
+        <div class="menu-row">
+            <a href="{% url 'training' %}" class="link">
+                <img src="{% static 'icons/training.svg' %}" alt="icon" class="icon"/>
+                <p>Training</p>
+            </a>
+        </div>
+    </li>
+     <li class="">
+        <div class="menu-row">
+            <a href="{% url 'detection' %}" class="link">
+                <img src="{% static 'icons/detection.svg' %}" alt="icon" class="icon"/>
+                <p>Detection</p>
+            </a>
+        </div>
+    </li>
+</ul>
+

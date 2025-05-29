@@ -1,0 +1,133 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content">
+        <div class="row">
+            <h1>Smart Grid Anomalies Detection</h1>
+            <div class="col-12">
+                <div class="card card-chart">
+                    <div class="card-header ">
+                        <div class="row">
+                            <div class="col-sm-6 text-left">
+                                <h4 class="card-category">Please select a desired algorithm for</h4>
+                                <h2 class="card-title">Training Model</h2>
+                            </div>
+                            <div class="col-sm-6">
+                                <form method="POST" action="">
+                                    {% csrf_token %} <!-- is for security (required by Django). -->
+                                    <div class="btn-group">
+                                        <button class="btn btn-primary animation-on-hover" type="submit"
+                                                name="algorithm_selected" value="AutoEncoder-GAN">
+                                            AutoEncoder-GAN
+                                        </button>
+                                        <button class="btn btn-default animation-on-hover" type="submit"
+                                                name="algorithm_selected" value="CNN">CNN
+                                        </button>
+                                        <button class="btn btn-warning animation-on-hover" type="submit"
+                                                name="algorithm_selected" value="LSTM">LSTM
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        {% if is_data %} <!-- if is_data == true -->
+                            <div class="card card-chart">
+                                <div class="center">
+                                    {{ plot|safe }} <!-- chart is rendered -->
+                                </div>
+                            </div>
+                            <div class="">
+                                <table class="table tablesorter " id="">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        {% for column in columns %}
+                                            <th>
+                                                {{ column }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in data %}
+                                        <tr>
+                                            {% for value in row %}
+                                                <td>
+                                                    {{ value }}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p>
+                On this page you can train the model with one of 3 algorithms:
+            </p>
+            <ul>
+                <li>GAN - Generative Adversarial Network</li>
+                <li>CNN - Convolutional Neural Network</li>
+                <li>LSTM - Long/Short Term Memory</li>
+            </ul>
+            <div class="text-block">
+                <h4>Generative Adversarial Network (GAN)</h4>
+                <p>
+                    GAN is a type of artificial intelligence framework introduced by Ian Goodfellow and his
+                    colleagues in
+                    2014.
+                    It consists of two neural networks, the generator and the discriminator, which are trained
+                    simultaneously
+                    through adversarial training.
+                    The generator generates new data instances, while the discriminator evaluates them for
+                    authenticity.
+                    GANs are primarily used for generating realistic synthetic data, such as images, videos, and
+                    text, with
+                    applications in image generation, image-to-image translation, and data augmentation.
+                </p>
+            </div>
+            <div class="text-block">
+                <h4>Convolutional Neural Network (CNN)</h4>
+                <p>
+                    CNN is a class of deep neural networks commonly applied to analyzing visual imagery.
+                    It utilizes convolutional layers, pooling layers, and fully connected layers to learn
+                    hierarchical
+                    features
+                    from input images.
+                    CNNs are well-suited for tasks like image classification, object detection, facial recognition,
+                    and
+                    image
+                    segmentation.
+                    They have revolutionized computer vision and achieved state-of-the-art performance in various
+                    image-related
+                    tasks.
+                </p>
+            </div>
+            <div class="text-block">
+                <h4>Long/Short Term Memory (LSTM)</h4>
+                <p>
+                    LSTM is a type of recurrent neural network (RNN) architecture, designed to overcome the
+                    vanishing
+                    gradient
+                    problem in traditional RNNs.
+                    It has memory cells that can maintain information over time intervals, allowing it to capture
+                    long-term
+                    dependencies in sequential data.
+                    LSTM networks are widely used for sequence prediction and sequence-to-sequence learning tasks,
+                    such as
+                    language modeling, machine translation, speech recognition, and time series forecasting.
+                    They have the ability to learn and remember patterns in time series data and have become a
+                    cornerstone
+                    in
+                    many natural language processing (NLP) and time series analysis applications.
+                </p>
+            </div>
+        </div>
+{% endblock content %}

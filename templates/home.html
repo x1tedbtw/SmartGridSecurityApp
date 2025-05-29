@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content">
+        <div class="row">
+            <h1>Smart Grid Anomalies Detection</h1>
+            <div>
+                <div class="text-block">
+                    <h3>What is Smart Grids?</h3>
+                    <p>
+                        Smart grids are electricity network that use digital technologies, sensors and software to
+                        better
+                        match the supply and demand of electricity in real time while minimizing costs and maintaining
+                        the
+                        stability and reliability of the grid.
+                    </p>
+                </div>
+                <div class="text-block">
+                    <h3>Why do we need Anomalies Detection app?</h3>
+                    <p>
+                        Smart Grids are vulnerable. Hackers can try to alter or steal data. They can attack the smart
+                        grid
+                        and it will result in transmission of incorrect data to the base station. Traditional security
+                        measures, such as statistical and signature-based detection techniques, have been introduced to
+                        mitigate these risks. However, these techniques fail to detect new or previously unseen attacks.
+                        That’s why we are using AI to detect Smart Grids attacks.
+                    </p>
+                </div>
+                <div class="text-block">
+                    <h3>How to use this app?</h3>
+                    <p>
+                        - Go to page <b>Dataset</b> to review the training dataset.
+                    </p>
+                    <p>
+                        - Go to page <b>Training</b> to train the model using one of 3 ML algorithms: AutoEncoder-GAN,
+                        CNN
+                        and LSTM. You can also review the metrics there such as accuracy, true positive rate, false
+                        positive
+                        rate and f1 score.
+                    </p>
+                    <p>
+                        - Go to page <b>Detection</b> to find and classify anomalies in your dataset.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

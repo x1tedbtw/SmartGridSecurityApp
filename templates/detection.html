@@ -1,0 +1,82 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="content">
+        <h1>Smart Grid Anomalies Detection</h1>
+        {% if not is_selected %}
+            <div class="col-sm-6 text-left">
+                <h3>Please upload the file</h3>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="file" name="file" accept=".csv" value="Upload">
+                    <button class="btn btn-primary animation-on-hover" type="submit">Upload file</button>
+                </form>
+            </div>
+        {% else %}
+            <div class="col-12">
+            <div class="card card-chart">
+                <div class="card-header ">
+                    <div class="row">
+                        <div class="col-sm-6 text-left">
+                            <h4 class="card-category">Please select a desired algorithm for</h4>
+                            <h2 class="card-title">Detecting and Classification Anomalies</h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <form method="POST" action="">
+                                {% csrf_token %} <!--is for security (required by Django). -->
+                                <div class="btn-group">
+                                    <button class="btn btn-primary animation-on-hover" type="submit"
+                                            name="algorithm_selected" value="autoencoder_model">
+                                        AutoEncoder-GAN
+                                    </button>
+                                    <button class="btn btn-default animation-on-hover" type="submit"
+                                            name="algorithm_selected" value="cnn_model">CNN
+                                    </button>
+                                    <button class="btn btn-warning animation-on-hover" type="submit"
+                                            name="algorithm_selected" value="lstm_model">LSTM
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if is_data %}
+                        {% if is_successful %}
+                            <div class="">
+                                <table class="table tablesorter " id="">
+                                    <thead class=" text-primary">
+                                    <tr>
+                                        {% for column in columns %}
+                                            <th>
+                                                {{ column }}
+                                            </th>
+                                        {% endfor %}
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for row in data %}
+                                        <tr>
+                                            {% for value in row %}
+                                                <td>
+                                                    {{ value }}
+                                                </td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="alert alert-success" role="alert">
+                                Format of test data is unappropriated. The csv file should have 10 columns. Try again
+                            </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+{% endblock content %}
