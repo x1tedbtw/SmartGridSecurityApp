@@ -75,7 +75,9 @@ def detection(request):
             is_selected = True
             current_algorithm = request.POST.get(
                 'algorithm_selected')
-            analyzed_data, is_successful = detect_anomalies(current_algorithm, encoded_dataset, dataset['columns'])
+            # Exclude 'label' column since it's not in test data
+            columns_without_label = [col for col in dataset['columns'] if col != 'label']
+            analyzed_data, is_successful = detect_anomalies(current_algorithm, encoded_dataset, columns_without_label)
 
     context = {"is_selected": is_selected, "is_data": is_data, "is_successful": is_successful,
                "columns": dataset['columns'], "data": analyzed_data}
