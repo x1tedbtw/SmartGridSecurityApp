@@ -4,16 +4,12 @@ from keras.utils import to_categorical
 from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
-import os  # Add this import
-from django.conf import settings  # Add this import
 from backend.utils import get_filepath, save_to_file
 
 
 def load_data(show_plot=False):
-    csv_path = os.path.join(settings.BASE_DIR, 'data', 'training_dataset.csv')
+    csv_path = get_filepath('data/training_dataset.csv')
     training_dataset = pd.read_csv(csv_path)
-
-
 
     # fill the gaps
     training_dataset.fillna(0, inplace=True)

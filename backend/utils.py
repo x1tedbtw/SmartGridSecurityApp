@@ -11,8 +11,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
 
+from django.conf import settings  # ADD THIS LINE
 from backend.constants import LABELS
-
 
 logger = logging.getLogger(__name__)
 
@@ -50,12 +50,16 @@ def get_metrics(predicted_y, test_y):
 
 
 def get_filepath(filename):
-    parent_path = "C:\\Users\\nefed\\Vitalii\\SmartGridSecurity"
-    return os.path.join(parent_path, filename)
+    # CHANGE THIS FUNCTION - Use Django's BASE_DIR instead of hardcoded path
+    return os.path.join(settings.BASE_DIR, filename)
 
 
 def save_to_file(filename, data):
-    with open(get_filepath(filename), 'wb') as f:
+    # Ensure directory exists before saving
+    filepath = get_filepath(filename)
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+
+    with open(filepath, 'wb') as f:
         pickle.dump(data, f)
 
 
@@ -68,6 +72,10 @@ def read_from_file(filename):
 
 
 def save_model_components_to_files(model, training_history, model_name):
+    # Ensure model directory exists
+    model_dir = get_filepath('model')
+    os.makedirs(model_dir, exist_ok=True)
+
     model.save_weights(get_filepath(f'model/{model_name}_weights.h5'))
     json_model = model.to_json()
     with open(get_filepath(f"model/{model_name}.json"), "w") as json_file:
@@ -79,7 +87,6 @@ def save_model_components_to_files(model, training_history, model_name):
 
 
 def show_confusion_matrix(predicted_y, test_y, title):
-
     conf_matrix = confusion_matrix(test_y, predicted_y)
     fig = plt.figure(figsize=(6, 6), facecolor='#32325d')
     ax = sns.heatmap(conf_matrix, xticklabels=LABELS, yticklabels=LABELS, annot=True, cmap="magma", fmt="g", linecolor='#32325d', linewidth=2)
