@@ -3,13 +3,11 @@ Web application for Smart Grid anomalies detection and classification using AI
 
 ## Prerequisites
 
-Before you begin, ensure you have the following installed on your system:
+Before you begin, ensure you have the following prerequisites installed on your system:
 
 - **PyCharm** - [Download here](https://www.jetbrains.com/pycharm/)
 - **Python 3.7.9 (64-bit)** - [Download here](https://www.python.org/downloads/release/python-379/)
 - **Git** - [Download here](https://git-scm.com/downloads)
-
----
 
 ## Installation Steps
 
@@ -23,7 +21,7 @@ cd SmartGridSecurity
 ```
 
 ### 2. Set Python Interpreter
-- **PyCharm:** File → Settings → Project → Python Interpreter → Add → System Interpreter → Select Python 3.7.9
+- Select Python 3.7.9
 
 
 ### 3. Create Virtual Environment
