@@ -1,5 +1,5 @@
 # SmartGridSecurity
-Web application for Smart Grid anomalies detection and classification using AI
+Web application for Anomaly Detection in Smart Grid Systems.
 
 ## Prerequisites
 
